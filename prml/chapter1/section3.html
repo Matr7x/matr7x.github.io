@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Model Selection | PRML读书笔记</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.4">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-katex/katex.min.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../chapter1/section4.html" />
+    
+    
+    <link rel="prev" href="../chapter1/section2.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="1.3"
+        data-chapter-title="Model Selection"
+        data-filepath="chapter1/section3.md"
+        data-basepath=".."
+        data-revision="Fri Aug 26 2016 14:47:22 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="chapter1/index.html">
+            
+                
+                    <a href="../chapter1/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        Introduction
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="chapter1/section1.html">
+            
+                
+                    <a href="../chapter1/section1.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        Example: Polynomial Curve Fitting
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="chapter1/section2.html">
+            
+                
+                    <a href="../chapter1/section2.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        Probability Theory
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="chapter1/section3.html">
+            
+                
+                    <a href="../chapter1/section3.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        Model Selection
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="chapter1/section4.html">
+            
+                
+                    <a href="../chapter1/section4.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.4.</b>
+                        
+                        The Curse of Dimensionality
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="chapter1/section5.html">
+            
+            <span><b>1.5.</b> Decision Theory</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="chapter1/section6.html">
+            
+            <span><b>1.6.</b> Information Theory</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >PRML读书笔记</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="model-selection">Model Selection</h1>
+<p>&#x8FD9;&#x4E00;&#x7AE0;&#x4E3B;&#x8981;&#x5173;&#x4E8E;<code>&#x6A21;&#x578B;&#x9009;&#x62E9;</code>&#xFF0C;&#x8BB2;&#x7684;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#xFF0C;&#x5728;<code>&#x6781;&#x5927;&#x4F3C;&#x7136;</code>&#x65B9;&#x6CD5;&#x4E2D;&#xFF0C;&#x8BAD;&#x7EC3;&#x96C6;&#x4E0A;&#x7684;&#x6027;&#x80FD;&#x5E76;&#x4E0D;&#x4E00;&#x5B9A;&#x548C;&#x672A;&#x77E5;&#x6570;&#x636E;&#x4E0A;&#x7684;&#x9884;&#x6D4B;&#x6027;&#x80FD;&#x4E00;&#x81F4;&#xFF0C;&#x539F;&#x56E0;&#x662F;<code>&#x8FC7;&#x62DF;&#x5408;</code>&#x7684;&#x5B58;&#x5728;&#x3002;&#x6211;&#x4EEC;&#x6211;&#x4EEC;&#x5728;&#x9009;&#x62E9;&#x6A21;&#x578B;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x80FD;&#x4F9D;&#x8D56;&#x4E8E;&#x8BAD;&#x7EC3;&#x96C6;&#x4E0A;&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x800C;&#x5E94;&#x8BE5;&#x4F9D;&#x8D56;&#x5728;&#x5206;&#x79BB;&#x51FA;&#x6765;&#x7684;&#x6570;&#x636E;&#x96C6;&#x4E0A;&#x7684;&#x6700;&#x597D;&#x9884;&#x6D4B;&#x6027;&#x80FD;&#xFF0C;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x96C6;&#x6211;&#x4EEC;&#x6210;&#x4E3A;<code>&#x9A8C;&#x8BC1;&#x96C6;</code>(validation set)&#x6216;&#x8005;<code>&#x6D4B;&#x8BD5;&#x96C6;</code>&#x3002;&#x5F88;&#x591A;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x636E;&#x96C6;&#x5F88;&#x5C0F;&#xFF0C;&#x4E3A;&#x4E86;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x5728;&#x5C3D;&#x53EF;&#x80FD;&#x591A;&#x7684;&#x6570;&#x636E;&#x4E0A;&#x8FDB;&#x884C;&#x8BAD;&#x7EC3;&#x3002;&#x56E0;&#x6B64;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x79F0;&#x4E3A;<code>&#x4EA4;&#x53C9;&#x9A8C;&#x8BC1;</code>&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F7F;&#x7528;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>S</mi><mo>&#x2212;</mo><mn>1</mn><mo>)</mo><mi mathvariant="normal">/</mi><mi>S</mi></mrow><annotation encoding="application/x-tex">(S-1)/S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mbin">&#x2212;</span><span class="mord mathrm">1</span><span class="mclose">)</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>&#x7684;&#x6570;&#x636E;&#x7528;&#x4E8E;&#x8BAD;&#x7EC3;&#xFF0C;&#x4F7F;&#x7528;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x6765;&#x8BC4;&#x4F30;&#x6027;&#x80FD;&#x3002;&#x5F53;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>=</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">S=N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.10903em;">N</span></span></span></span>&#x65F6;&#x5C31;&#x662F;<code>&#x7559;&#x4E00;&#x4EA4;&#x53C9;&#x9A8C;&#x8BC1;</code>&#xFF0C;&#x5176;&#x4E2D;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.10903em;">N</span></span></span></span>&#x662F;&#x6570;&#x636E;&#x91CF;&#x7684;&#x5927;&#x5C0F;&#x3002;&#x4EA4;&#x53C9;&#x9A8C;&#x8BC1;&#x7684;&#x4E3B;&#x8981;&#x7F3A;&#x70B9;&#x5728;&#x4E8E;&#x8BAD;&#x7EC3;&#x7684;&#x6B21;&#x6570;&#x7531;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>&#x51B3;&#x5B9A;&#xFF0C;&#x8BAD;&#x7EC3;&#x7684;&#x6548;&#x7387;&#x4E0D;&#x9AD8;&#x3002;</p>
+<p>&#x9664;&#x6B64;&#x4E4B;&#x5916;&#x7B80;&#x8981;&#x4ECB;&#x7ECD;&#x4E86;AIC&#x3002;BIC&#x5C06;&#x5728;4.4.1&#x8282;&#x4E2D;&#x8FDB;&#x884C;&#x4ECB;&#x7ECD;&#x3002;</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../chapter1/section2.html" class="navigation navigation-prev " aria-label="Previous page: Probability Theory"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../chapter1/section4.html" class="navigation navigation-next " aria-label="Next page: The Curse of Dimensionality"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"katex":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
